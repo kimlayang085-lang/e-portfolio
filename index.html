@@ -243,6 +243,7 @@ section:last-of-type{border-bottom:none;}
   display:flex;flex-direction:column;gap:20px;
   transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
+.project-card > div:last-child{display:flex;flex:1;flex-direction:column;}
 .project-card:hover{transform:translateY(-2px);}
 .project-thumb{
   width:100%;aspect-ratio:16/10;border-radius:9px;position:relative;overflow:hidden;
@@ -291,10 +292,21 @@ html[data-theme="light"] .project-thumb-arrow{background:rgba(255,255,255,0.85);
   border:1px solid var(--line);background:var(--bg-elev);color:var(--text-dim);
 }
 .project-link{
-  margin-top:8px;font-size:0.86rem;font-weight:500;color:var(--text);display:inline-flex;align-items:center;gap:6px;
+  margin-top:auto;padding-top:20px;font-size:0.86rem;font-weight:500;color:var(--text);display:inline-flex;align-items:center;gap:6px;
   border-bottom:1px solid var(--line-strong);padding-bottom:2px;width:fit-content;transition:gap .15s,color .15s,border-color .15s;
 }
 .project-link:hover{gap:9px;color:var(--accent);border-color:var(--accent);}
+
+.project-filter-btn{
+  padding:10px 18px;border-radius:8px;font-size:0.9rem;font-weight:500;
+  background:transparent;border:1px solid var(--line);color:var(--text-dim);
+  transition:all .2s ease;cursor:pointer;
+}
+.project-filter-btn:hover{border-color:var(--accent);color:var(--text);}
+.project-filter-btn.active{background:var(--accent);border-color:var(--accent);color:white;}
+
+.project-card[data-major]{display:none;}
+.project-card[data-major].show{display:flex;}
 
 /* ============ SKILLS ============ */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
@@ -419,11 +431,10 @@ footer{
 
 <main>
   <section id="hero">
-    <div class="hero-eyebrow"><span class="status-dot"></span>E-Portfolio · Dual Degree Student</div>
     <div class="hero-grid">
       <div>
         <h1 class="hero-name">Kim Layang</h1>
-        <p class="hero-tagline">I'm pursuing Software Engineering and Professional Communication at the same time — building software while learning how to write, present, and explain it clearly.</p>
+        <p class="hero-tagline">I’m pursuing degrees in Software Engineering and Professional Communication, combining my passion for building software with my skills in writing, presenting, and communicating ideas clearly</p>
 
         <dl class="hero-meta">
           <div class="hero-chip glass">
@@ -431,12 +442,16 @@ footer{
             <dd>Limkokwing University — Software Engineering</dd>
           </div>
           <div class="hero-chip glass">
+            <dt>Status</dt>
+            <dd>Year 3 · Currently Studying</dd>
+          </div>
+          <div class="hero-chip glass">
             <dt>University 2</dt>
             <dd>IFL — Bachelor of Professional Communication</dd>
           </div>
           <div class="hero-chip glass">
             <dt>Status</dt>
-            <dd>Year 3 · Currently Studying</dd>
+            <dd>Year 4 · Currently Studying</dd>
           </div>
         </dl>
 
@@ -478,9 +493,66 @@ footer{
       <div class="section-rule"></div>
     </div>
 
+    <div class="project-filters" style="display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap;">
+      <button class="project-filter-btn active" data-filter="all" onclick="filterProjects('all')">All Projects</button>
+      <button class="project-filter-btn" data-filter="se" onclick="filterProjects('se')">Software Engineering</button>
+      <button class="project-filter-btn" data-filter="comm" onclick="filterProjects('comm')">Professional Communication</button>
+    </div>
+
     <div class="projects-grid">
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
+        <div class="project-thumb">
+          <div class="project-thumb-track">
+            <div class="project-thumb-slide"><img src="images/We1.png" alt="Mock software engineering project screenshot 1"></div>
+            <div class="project-thumb-slide"><img src="images/We2.png" alt="Mock software engineering project screenshot 2"></div>
+            <div class="project-thumb-slide"><img src="images/We3.png" alt="Mock software engineering project screenshot 3"></div>
+          </div>
+          <button class="project-thumb-arrow prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="project-thumb-arrow next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="project-thumb-dots"></div>
+        </div>
+        <div>
+          <div class="project-num-tag"></div>
+          <div class="project-title">Car Management System</div>
+          <div class="project-meta">Project Management · Year 3, Semester 2</div>
+          <p class="project-desc">Car Inventory Management System (CIMS) is a web app that lets a dealership manage vehicle inventory and maintenance in one place. Users log in with role-based access (admin, staff, customer) to add, edit, and browse vehicles with photos and details like condition, mileage, and EV battery health; record maintenance services for inventory or walk-in customer cars with cost and price tracking; and review analytics, inventory/status/brand breakdowns, service revenue vs. cost, monthly trends with Excel export.</p>
+          <div class="tag-row">
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag"> Node.js</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Cloudinary</span>
+          </div>
+          <a href="#" class="project-link">View project →</a>
+        </div>
+      </div>
+
+            <div class="project-card glass reveal show" data-major="se">
+        <div class="project-thumb">
+          <div class="project-thumb-track">
+            <div class="project-thumb-slide"><img src="images/" alt="Mock software engineering project screenshot 1"></div>
+            <div class="project-thumb-slide"><img src="images/" alt="Mock software engineering project screenshot 2"></div>
+            <div class="project-thumb-slide"><img src="images/" alt="Mock software engineering project screenshot 3"></div>
+          </div>
+          <button class="project-thumb-arrow prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="project-thumb-arrow next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="project-thumb-dots"></div>
+        </div>
+        <div>
+          <div class="project-num-tag"></div>
+          <div class="project-title">RoboNation</div>
+          <div class="project-meta">Ineraction Design & UX/UI · Year 3, Semester 2</div>
+          <p class="project-desc">a single hub built for Cambodia's STEM robotics community. A Parts & Accessories Marketplace lets users list, browse, and buy or sell components locally, filtered by category, condition, and location. STEM Team & Player Matchmaking lets individuals or teams create profiles, select a discipline, and get matched with opponents of similar skill and location, then schedule matches and log results. Tournament Hosting gives organizers everything needed to run competitions: rules, registration, brackets, scoring, and published rankings. Live Streaming for Creators lets teams broadcast builds, matches, and tutorials to an in-app audience, helping them grow a following while giving viewers a place to discover new STEM content.
+</p>
+          <div class="tag-row">
+            <span class="tag">UX/UI</span>
+            <span class="tag">Figma</span>
+          </div>
+          <a href="#" class="project-link">View project →</a>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/coverLM.png" alt="Library Management Android app screenshot 1"></div>
@@ -492,7 +564,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 01</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Library Management System</div>
           <div class="project-meta">Mobile Device Programming · Year 3, Semester 1</div>
           <p class="project-desc">An Android app where students can browse and borrow books, then leave ratings and comments. Admins can add, remove, and edit book listings, and view student borrowing activity.</p>
@@ -505,7 +577,7 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/coverW.png" alt="Pet Shop Website screenshot 1"></div>
@@ -517,7 +589,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 02</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Pet Shop Website</div>
           <div class="project-meta">Computer Graphic 2A · Year 3, Semester 2</div>
           <p class="project-desc">A website design for a pet shop, allowing pet owners to browse and purchase pet essentials — including housing, accessories, and food for their pets.</p>
@@ -529,7 +601,7 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/jeatnascan.jpg" alt="Jeat Nas Co. orange juice can label and 3D mockup, screenshot 1"></div>
@@ -540,7 +612,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 03</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Jeat Nas Co. — Orange Juice Can Label</div>
           <div class="project-meta">Computer Graphic 2A</div>
           <p class="project-desc">A complete packaging design for a fictional orange juice brand, including a full-wrap can label with nutrition facts and ingredients, plus a 3D product mockup for promotional use.</p>
@@ -552,22 +624,22 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="comm">
         <div class="project-thumb">
           <div class="project-thumb-track">
-            <div class="project-thumb-slide"><img src="images/research1.png" alt="Research project screenshot 1"></div>
-            <div class="project-thumb-slide"><img src="images/research2.png" alt="Research project screenshot 2"></div>
-            <div class="project-thumb-slide"><img src="images/research3.png" alt="Research project screenshot 3"></div>
+            <div class="project-thumb-slide"><img src="images/L2.png" alt="Research project screenshot 1"></div>
+            <div class="project-thumb-slide"><img src="images/L3.png" alt="Research project screenshot 2"></div>
+            <div class="project-thumb-slide"><img src="images/L1.jpg" alt="Research project screenshot 3"></div>
           </div>
           <button class="project-thumb-arrow prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
           <button class="project-thumb-arrow next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 04</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Research on Teacher Communication Style</div>
           <div class="project-meta">Research Methodology · Year 3</div>
-          <p class="project-desc">A research project examining how different teacher communication styles affect student engagement and learning outcomes in the classroom.</p>
+          <p class="project-desc">A research project examining how different teacher communication styles affect student engagement and learning outcomes in the classroom. The way teachers communicate with students can affect how students feel, participate, and perform in class.Teachers use different communication styles, such as verbal communication, non-verbal communication, and supportive or relational communication. We wanted to understand which communication style students think is the most effective and how these styles influence classroom engagement and academic performance.</p>
           <div class="tag-row">
             <span class="tag">Research</span>
             <span class="tag">Communication Theory</span>
@@ -576,7 +648,7 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/lmsd.png" alt="Library Management System screenshot 1"></div>
@@ -588,7 +660,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 05</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Library Management System (Desktop)</div>
           <div class="project-meta">Java OOP · Year 2</div>
           <p class="project-desc">A desktop library management system built in Java, where students can browse and borrow books and leave ratings and comments, while admins can add, remove, and edit book records and view student information.</p>
@@ -600,7 +672,7 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/A1.png" alt="Arena Cambodia Auto website screenshot 1"></div>
@@ -612,7 +684,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 06</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Arena Cambodia Auto — Website Redesign</div>
           <div class="project-meta">Team Project · Frontend Development</div>
           <p class="project-desc">A vehicle news and knowledge platform featuring news articles, video reviews, a car comparison tool, and browsable listings by vehicle type and make/model. I redesigned the frontend as part of a team, rebuilding the UI in Next.js with a modular component structure and custom SCSS styling, and connecting the pages to a backend API for live content with ISR caching.</p>
@@ -626,7 +698,7 @@ footer{
       </div>
 
       <!-- PROJECT 04 - TEMPLATE FOR YOU TO FILL IN -->
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/il.png" alt="Project screenshot 1"></div>
@@ -638,7 +710,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 04</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Ingredient Lists</div>
           <div class="project-meta">Flutter App · Mobile Development</div>
           <p class="project-desc">A Flutter app for discovering and managing recipes with secure user authentication, cloud sync, and offline support. Create and organize personal recipes, search across YouTube videos and external APIs, auto-populate shopping lists, and export as PDF. Features real-time Supabase backend, cloud-synced profiles, smart search, and a warm minimalist design with dark-mode support.</p>
@@ -651,7 +723,7 @@ footer{
         </div>
       </div>
 
-      <div class="project-card glass reveal">
+      <div class="project-card glass reveal show" data-major="se">
         <div class="project-thumb">
           <div class="project-thumb-track">
             <div class="project-thumb-slide"><img src="images/QM.png" alt="Quizmaster screenshot 1"></div>
@@ -663,7 +735,7 @@ footer{
           <div class="project-thumb-dots"></div>
         </div>
         <div>
-          <div class="project-num-tag">Case 07</div>
+          <div class="project-num-tag"></div>
           <div class="project-title">Quizmaster</div>
           <div class="project-meta">Android App · Mobile Development</div>
           <p class="project-desc">A multi-category quiz application with user authentication, real-time scoring, performance tracking, and quiz history review. Features user profiles, category-based quizzes, detailed result analysis, and answer review functionality. Built with Kotlin and Firebase for secure authentication and cloud data management.</p>
@@ -675,6 +747,32 @@ footer{
           <a href="https://github.com/kimlayang085-lang/Quizmaster" class="project-link">View project →</a>
         </div>
       </div>
+
+      <div class="project-card glass reveal show" data-major="comm">
+        <div class="project-thumb">
+          <div class="project-thumb-track">
+            <div class="project-thumb-slide"><img src="images/women_expectations_1.png" alt="Project screenshot 1"></div>
+            <div class="project-thumb-slide"><img src="images/women_expectations_2.png" alt="Project screenshot 2"></div>
+            <div class="project-thumb-slide"><img src="images/women_expectations_3.png" alt="Project screenshot 3"></div>
+          </div>
+          <button class="project-thumb-arrow prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="project-thumb-arrow next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="project-thumb-dots"></div>
+        </div>
+        <div>
+          <div class="project-num-tag"></div>
+          <div class="project-title">Social Expectations on Women: Research & Critical Analysis</div>
+          <div class="project-meta">Literature Studies · Year 2</div>
+          <p class="project-desc">A multi-phase group project combining primary research with literary analysis to examine gender roles and social expectations in Cambodia and beyond. Conducted four structured interviews with respondents of varying ages and backgrounds to gather qualitative data on women's experiences with education, careers, and family expectations. Synthesized research into a critical essay connecting real-world perspectives with Victorian literature (Charles Dickens' Oliver Twist), arguing that women continue to face persistent societal barriers despite historical progress.</p>
+          <div class="tag-row">
+            <span class="tag">Research Methodology</span>
+            <span class="tag">Literary Analysis</span>
+            <span class="tag">Academic Writing</span>
+            <span class="tag">Critical Reasoning</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1WqNvYpZ3a8Tp8H3cMh--JpsAiLdaepGH?usp=sharing" class="project-link">View project →</a>
+  </div>
+</div>
 
     </div>
   </section>
@@ -994,6 +1092,26 @@ document.querySelectorAll('.project-thumb').forEach(thumb => {
   prevBtn.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }));
   nextBtn.addEventListener('click', () => track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }));
 });
+
+/* ============ PROJECT FILTERING ============ */
+function filterProjects(filter) {
+  const buttons = document.querySelectorAll('.project-filter-btn');
+  const projects = document.querySelectorAll('[data-major]');
+  
+  buttons.forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+  
+  projects.forEach(project => {
+    const major = project.getAttribute('data-major');
+    if (filter === 'all') {
+      project.classList.add('show');
+    } else if (major.includes(filter)) {
+      project.classList.add('show');
+    } else {
+      project.classList.remove('show');
+    }
+  });
+}
 
 /* ============ SCROLL REVEAL ============ */
 const revealEls = document.querySelectorAll('.reveal');
